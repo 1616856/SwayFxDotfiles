@@ -1,0 +1,59 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "margin-top": 12,
+    "margin-left": 16,
+    "margin-right": 16,
+    "spacing": 0,
+
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["mpris"],
+    "modules-right": ["pulseaudio", "custom/ddc_brightness", "cpu", "temperature", "clock", "custom/power"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+
+    "mpris": {
+        "format": "󰎆  {artist} - {title}",
+        "format-paused": "󰎊  {artist} - {title}",
+        "max-length": 40,
+        "ellipsis": "..."
+    },
+
+    "pulseaudio": {
+        "format": "󰕾  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "on-click": "pamixer -t"
+    },
+
+	"custom/ddc_brightness": {
+        "format": "󰃠  {}%",
+        "exec": "~/.config/waybar/scripts/brightness.sh get",
+        "interval": 30,
+        "on-scroll-up": "~/.config/waybar/scripts/brightness.sh up && pkill -SIGRTMIN+2 waybar",
+        "on-scroll-down": "~/.config/waybar/scripts/brightness.sh down && pkill -SIGRTMIN+2 waybar",
+        "signal": 2
+    },
+
+    "cpu": {
+        "format": "    {usage}%"
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C"
+    },
+
+    "clock": {
+        "format": "{:%I:%M %p}"
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "wlogout"
+    }
+}
