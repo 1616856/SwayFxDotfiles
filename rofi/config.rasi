@@ -1,0 +1,86 @@
+configuration {
+    modi:                "drun,run,window";
+    show-icons:          true;
+    drun-display-format: "{name}";
+    window-format:       "{w} · {c} · {t}";
+    sidebar-mode:        false;
+    display-drun:        " "; 
+}
+@import "~/.cache/wal/colors-rofi.rasi"
+* {
+    font: "Iosevka Custom, Source Han Sans HW Arabic, JetBrainsMono Nerd Font, sans-serif 12";
+}
+window {
+    width:            650px;
+    height:           450px;
+    background-color: rgba(20, 20, 25, 0.70);
+    border:           1px;
+    border-color:     rgba(255, 255, 255, 0.04);
+    border-radius:    8px;
+}
+mainbox {
+    spacing:          10px;
+    padding:          16px;
+    background-color: transparent;
+    children:         [ inputbar, listview ];
+}
+inputbar {
+    spacing:          10px;
+    padding:          8px 12px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border:           1px;
+    border-color:     rgba(255, 255, 255, 0.04);
+    border-radius:    6px;
+    children:         [ prompt, entry ];
+}
+prompt {
+    background-color: transparent;
+    text-color:       @color5;
+}
+entry {
+    background-color: transparent;
+    text-color:       rgba(255, 255, 255, 0.85);
+    placeholder:      "Search applications...";
+    placeholder-color: rgba(255, 255, 255, 0.25);
+}
+listview {
+    columns:          1;
+    cycle:            true;
+    dynamic:          true;
+    layout:           vertical;
+    spacing:          6px;
+    background-color: transparent;
+}
+element {
+    orientation:      horizontal;
+    border-radius:    6px;
+    padding:          6px 10px;
+    spacing:          12px;
+    background-color: transparent;
+}
+element-icon {
+    size:              24px;
+    cursor:            pointer;
+    vertical-align:    0.5;
+    background-color: transparent;
+}
+element-text {
+    text-color:       rgba(255, 255, 255, 0.75);
+    vertical-align:    0.5;
+    background-color: transparent;
+}
+element normal.normal {
+    background-color: transparent;
+}
+element alternate.normal {
+    background-color: transparent;
+}
+element selected.normal {
+    background-color: rgba(255, 255, 255, 0.10);
+    border:           1px;
+    border-color:     @color5;
+    border-radius:    6px;
+}
+element selected.normal element-text {
+    text-color:
+}

@@ -1,0 +1,83 @@
+set $mod Mod4
+set $wsDiscord " "
+set $wsMinecraft "󰍳"
+output DP-3 mode 1920x1080@120Hz
+corner_radius 13
+shadows on
+shadow_blur_radius 20
+shadow_color
+blur enable
+blur_xray off
+blur_passes 3
+blur_radius 6
+for_window [app_id="waybar"] blur disable
+for_window [app_id="kitty"] blur enable
+for_window [app_id="prismlauncher"] blur enable
+for_window [app_id="prismlauncher"] opacity 0.85
+gaps inner 3
+gaps outer 6
+default_border pixel 1
+animation_duration_ms 250
+include ~/.cache/wal/colors-sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec sleep 0.5 && swayosd-server
+exec waybar
+exec systemctl --user start hyprpolkitagent
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+exec vesktop
+exec awww-daemon
+exec swaync
+exec hyprlock
+exec swayidle -w timeout 300 'hyprlock' timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep 'hyprlock'
+exec swaymsg workspace number 1
+bindsym $mod+Shift+c exec swaymsg reload
+bindsym $mod+q exec kitty
+bindsym $mod+e exec kitty yazi
+bindsym $mod+Shift+q kill
+bindsym $mod+p exec prismlauncher
+bindsym $mod+k exec krita
+bindsym $mod+f exec firefox
+bindsym $mod+Shift+l exec hyprlock
+bindsym $mod+m workspace $wsMinecraft
+bindsym $mod+v workspace $wsDiscord
+bindsym $mod+Shift+m exec swaynag -t warning -m 'Exit Sway?' -b 'Yes' 'swaymsg exit'
+bindsym $mod+Shift+w exec $HOME/.config/Rofi-background-selector/rofi_background_selector.sh
+bindsym $mod+w floating toggle
+bindsym $mod+r exec rofi -show drun
+bindsym $mod+Print exec sh -c 'GEOM=$(slurp); if [ -n "$GEOM" ]; then grim -g "$GEOM" - | wl-copy && notify-send "Screenshot" "Region copied"; else notify-send "Screenshot" "nothing was screenshotted"; fi'
+bindsym $mod+Shift+Print exec ~/.config/sway/scripts/toggle_record.sh
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+assign [app_id="vesktop"] workspace $wsDiscord
+assign [app_id="prismlauncher"] workspace $wsMinecraft
+assign [class="Minecraft*"] workspace $wsMinecraft
+assign [title="Minecraft*"] workspace $wsMinecraft
+bindsym $mod+F12 exec swayosd-client --output-volume raise --max-volume 100
+bindsym $mod+F11 exec swayosd-client --output-volume lower --max-volume 100
+bindsym $mod+F10 exec swayosd-client --output-volume mute-toggle
+bindsym $mod+F9  exec playerctl play-pause
+bindsym $mod+F6  exec swayosd-client --brightness raise
+bindsym $mod+F5  exec swayosd-client --brightness lower
+input "type:keyboard" {
+    xkb_layout "us"
+}
+floating_modifier $mod normal
